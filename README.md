@@ -25,6 +25,51 @@ no system → deterministic workflow → one agent → optional team
 
 At every step it binds authority, state, tools, memory, security, evaluation, cost, rollback, and evidence.
 
+## Try it in 2 minutes
+
+Fastest route (Claude Code — every other host is [below](#install)):
+
+```text
+/plugin marketplace add ingcontartese-netizen/multi-agent-system-architect-v2
+/plugin install multi-agent-system-architect-v2@giuseppe-agent-skills
+/reload-plugins
+```
+
+Then open a fresh session, paste the [60-second smoke test](#a-60-second-smoke-test) prompt, and watch the Skill talk you *out* of a team you don't need.
+
+### See it in action
+
+<details>
+<summary><strong>Real session: asking for an "autonomous research team" — the Skill's actual reply</strong></summary>
+
+**Prompt:**
+
+```text
+Use multi-agent-system-architect-v2. I want an autonomous research team for a one-off summary. First decide whether I need any system at all. Return status, Mode, autonomy, risk, rationale, and next gate. Do not build anything.
+```
+
+**Reply (condensed from a real session):**
+
+> **status:** COMPLETE — triage only, nothing built.
+>
+> **Scope decision: NO SYSTEM (Mode A).** A one-off summary fails step 1 of the sequential necessity gate: a direct capability can deliver the result with no continuity, no persistent state, and no side effects. An "autonomous research team" is not justified — the doctrine treats multi-agent architecture as an outcome of triage, never the default, and no multi-agent justification condition (distinct permissions, independent verifier, useful parallelism, trust boundary) is material here.
+>
+> - **Mode:** A — no agentic system; hand off to a direct research-and-summarize task.
+> - **Autonomy:** AU2 for the handed-off task itself (supervised multi-step loop: search, read, synthesize, return). No standing autonomy is granted.
+> - **Risk:** R0 — read-only research, reversible output, no privileged access, no blast radius.
+>
+> **Rationale:** "One-off" removes every driver that would warrant a system: no recurring workflow, no durable state, no tool orchestration beyond ordinary search. Why not simpler: nothing is simpler than Mode A. Why not more complex: a team would add coordination cost, latency, and governance surface with no measured benefit.
+>
+> **Assumptions (marked, not verified):** topic is non-sensitive public information; output is a single document; no scheduled re-runs. If any of these are wrong — e.g., you need this weekly, or it must act on the findings — the triage reopens.
+>
+> **Handoff:** run the summary as a direct task. This skill exits here per Mode A.
+>
+> **Next gate:** none within this skill. Re-entry trigger: the task becomes recurring, stateful, or side-effectful — then return for Mode B triage before adding any agents.
+
+No team was spawned, no framework installed. That verdict — and the discipline behind it — is the product.
+
+</details>
+
 ## What this gives your agent
 
 - A necessity gate that can honestly conclude **no system needed**.
@@ -57,6 +102,8 @@ https://github.com/ingcontartese-netizen/multi-agent-system-architect-v2/tree/v2
 | Claude Chat / Cowork | Named release ZIP or marketplace | Account carrier packaged; live gate pending |
 | Google Antigravity | Tagged direct Skill copy | Packaged; live gate pending |
 | Cursor | Tagged Agent Skills import/copy | Format-compatible; live gate not claimed |
+
+*"Live gate pending" means the packaged Skill is byte-verified and CI-qualified for that host, but a release-specific in-app smoke test has not yet been recorded for these exact bytes. [Release evidence](docs/RELEASE_EVIDENCE.md) tracks precisely what is and is not verified.*
 
 ### Verify your download
 
