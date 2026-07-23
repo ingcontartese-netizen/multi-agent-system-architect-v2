@@ -158,28 +158,20 @@ def snapshot_tree(items: list[tuple[str, bytes]]) -> tuple[str, int]:
     return digest.hexdigest().upper(), total_bytes
 
 
-def remove_if_owned(path: Path, identity: os.stat_result) -> bool:
-    """Remove a generated path only when it is still the file we created."""
-    try:
-        current_identity = path.lstat()
-    except FileNotFoundError:
-        return False
-    if not os.path.samestat(identity, current_identity):
-        return False
-    path.unlink()
-    return True
-
-
 def build_zip(skill_root: Path, items: list[tuple[str, bytes]], destination: Path) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
-    created_identity = None
     try:
-        # Open the final path ourselves with O_EXCL semantics, then hand the
-        # owned file object to ZipFile. This removes the exists/open TOCTOU
-        # window and lets cleanup distinguish our partial file from a foreign
-        # file that another process created first.
-        with destination.open("xb") as handle:
-            created_identity = os.fstat(handle.fileno())
+        handle = destination.open("xb")
+    except FileExistsError as exc:
+        raise ReleaseError(f"refusing to overwrite release asset: {destination}") from exc
+
+    # Open the final path ourselves with O_EXCL semantics, then hand the owned
+    # file object to ZipFile. This removes the exists/open TOCTOU window.
+    # Failed builds retain any partial final path: path identity is not an
+    # atomic ownership proof, so exception cleanup must never unlink a
+    # replacement that another process may have installed.
+    try:
+        with handle:
             with zipfile.ZipFile(
                 handle,
                 mode="w",
@@ -202,14 +194,10 @@ def build_zip(skill_root: Path, items: list[tuple[str, bytes]], destination: Pat
                     info.compress_type = zipfile.ZIP_STORED
                     archive.writestr(info, data, compress_type=zipfile.ZIP_STORED)
     except Exception as exc:
-        if created_identity is None:
-            if isinstance(exc, FileExistsError):
-                raise ReleaseError(
-                    f"refusing to overwrite release asset: {destination}"
-                ) from exc
-            raise
-        remove_if_owned(destination, created_identity)
-        raise
+        raise ReleaseError(
+            "release ZIP build failed; partial output retained fail-closed at "
+            f"{destination}; retry with a fresh --out directory: {exc}"
+        ) from exc
 
 
 def asset_name(value: object) -> str:
@@ -245,18 +233,19 @@ def contained_file(directory: Path, name: str) -> Path:
 
 
 def exclusive_write(path: Path, data: bytes) -> None:
-    created_identity = None
     try:
-        with path.open("xb") as handle:
-            created_identity = os.fstat(handle.fileno())
+        handle = path.open("xb")
+    except FileExistsError as exc:
+        raise ReleaseError(f"refusing to overwrite release asset: {path}") from exc
+
+    try:
+        with handle:
             handle.write(data)
     except Exception as exc:
-        if created_identity is None:
-            if isinstance(exc, FileExistsError):
-                raise ReleaseError(f"refusing to overwrite release asset: {path}") from exc
-            raise
-        remove_if_owned(path, created_identity)
-        raise
+        raise ReleaseError(
+            "release asset write failed; partial output retained fail-closed at "
+            f"{path}; retry with a fresh --out directory: {exc}"
+        ) from exc
 
 
 def sha256_file(path: Path) -> str:
@@ -311,10 +300,8 @@ def main() -> int:
     manifest_asset = contained_file(out, manifest_source.name)
     evidence_asset = contained_file(out, evidence_source.name)
     checksum_path = contained_file(out, "SHA256SUMS.txt")
-    created: list[tuple[Path, os.stat_result]] = []
     try:
         build_zip(skill_root, items, archive_path)
-        created.append((archive_path, archive_path.lstat()))
         archive_sha = sha256_file(archive_path)
 
         post_files = inventory(skill_root)
@@ -323,9 +310,7 @@ def main() -> int:
             raise ReleaseError("source changed while release assets were being built")
 
         exclusive_write(manifest_asset, manifest_bytes)
-        created.append((manifest_asset, manifest_asset.lstat()))
         exclusive_write(evidence_asset, evidence_bytes)
-        created.append((evidence_asset, evidence_asset.lstat()))
 
         checksums = {
             archive_path.name: archive_sha,
@@ -336,11 +321,11 @@ def main() -> int:
             f"{digest}  {name}\n" for name, digest in sorted(checksums.items())
         ).encode("utf-8")
         exclusive_write(checksum_path, checksum_bytes)
-        created.append((checksum_path, checksum_path.lstat()))
-    except Exception:
-        for created_path, identity in reversed(created):
-            remove_if_owned(created_path, identity)
-        raise
+    except Exception as exc:
+        raise ReleaseError(
+            "release build did not complete; no automatic path cleanup was attempted; "
+            f"treat {out} as quarantined and retry with a fresh --out directory: {exc}"
+        ) from exc
 
     result = {
         "status": "pass",

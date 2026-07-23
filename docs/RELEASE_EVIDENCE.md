@@ -32,7 +32,7 @@ The exact 2.1.2 payload values are:
 | Deterministic Skill ZIP SHA-256 | `50153A5AD02611753B817749271B4DBAED77A078A90476C82708D567C754563B` |
 | Cross-runtime archive reproduction | CPython 3.12.13 = CPython 3.14.3 |
 | Public pytest | 164/164 PASS |
-| Release-tool tests | 47/47 PASS |
+| Release-tool tests | 48/48 PASS |
 | Archive format | `deterministic-zip-stored` |
 | Archive root directory | `multi-agent-system-architect-v2` |
 | Security matrix | 293/293 PASS |

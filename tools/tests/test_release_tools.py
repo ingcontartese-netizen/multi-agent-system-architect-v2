@@ -221,6 +221,27 @@ def test_builder_uses_exclusive_owned_handle_without_path_race(
         assert archive.read(f"{tmp_path.name}/SKILL.md") == b"payload"
 
 
+def test_builder_retains_failed_zip_and_refuses_retry(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    destination = tmp_path / "release.zip"
+    real_writestr = zipfile.ZipFile.writestr
+
+    def failing_writestr(archive, *args, **kwargs):
+        real_writestr(archive, *args, **kwargs)
+        raise OSError("synthetic ZIP write failure")
+
+    monkeypatch.setattr(build.zipfile.ZipFile, "writestr", failing_writestr)
+    with pytest.raises(build.ReleaseError, match="partial output retained fail-closed"):
+        build.build_zip(tmp_path, [("SKILL.md", b"payload")], destination)
+    assert destination.is_file()
+    assert destination.stat().st_size > 0
+
+    monkeypatch.setattr(build.zipfile.ZipFile, "writestr", real_writestr)
+    with pytest.raises(build.ReleaseError, match="refusing to overwrite"):
+        build.build_zip(tmp_path, [("SKILL.md", b"retry")], destination)
+
+
 def test_exclusive_write_preserves_preexisting_companion_asset(tmp_path: Path) -> None:
     destination = tmp_path / "PUBLIC_RELEASE_MANIFEST.json"
     destination.write_bytes(b"foreign asset")
@@ -229,7 +250,7 @@ def test_exclusive_write_preserves_preexisting_companion_asset(tmp_path: Path) -
     assert destination.read_bytes() == b"foreign asset"
 
 
-def test_exclusive_write_removes_only_its_partial_file(
+def test_exclusive_write_retains_partial_file_and_refuses_retry(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     destination = tmp_path / "RELEASE_EVIDENCE.md"
@@ -261,9 +282,12 @@ def test_exclusive_write_removes_only_its_partial_file(
         return handle
 
     monkeypatch.setattr(Path, "open", patched_open)
-    with pytest.raises(OSError, match="synthetic partial-write failure"):
+    with pytest.raises(build.ReleaseError, match="partial output retained fail-closed"):
         build.exclusive_write(destination, b"new payload")
-    assert not destination.exists()
+    assert destination.read_bytes() == b"n"
+    with pytest.raises(build.ReleaseError, match="refusing to overwrite"):
+        build.exclusive_write(destination, b"retry payload")
+    assert destination.read_bytes() == b"n"
 
 
 def test_physical_tree_binds_empty_directories(tmp_path: Path) -> None:
@@ -278,16 +302,40 @@ def test_physical_tree_binds_empty_directories(tmp_path: Path) -> None:
     assert digest_a != digest_b
 
 
-def test_cleanup_removes_owned_file_but_preserves_replacement(tmp_path: Path) -> None:
-    target = tmp_path / "asset.txt"
-    target.write_bytes(b"owned")
-    owned_identity = target.lstat()
-    assert build.remove_if_owned(target, owned_identity) is True
-    assert not target.exists()
+def test_failed_write_never_deletes_replacement(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    destination = tmp_path / "asset.txt"
+    original_open = Path.open
 
-    target.write_bytes(b"first identity")
-    stale_identity = target.lstat()
-    target.unlink()
-    target.write_bytes(b"foreign replacement")
-    assert build.remove_if_owned(target, stale_identity) is False
-    assert target.read_bytes() == b"foreign replacement"
+    class ReplacingFailingWriter:
+        def __init__(self, handle):
+            self.handle = handle
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            self.handle.close()
+            destination.unlink()
+            destination.write_bytes(b"foreign replacement")
+            return False
+
+        def fileno(self):
+            return self.handle.fileno()
+
+        def write(self, data):
+            self.handle.write(data[:1])
+            self.handle.flush()
+            raise OSError("synthetic replacement race")
+
+    def patched_open(path, *args, **kwargs):
+        handle = original_open(path, *args, **kwargs)
+        if path == destination and args and args[0] == "xb":
+            return ReplacingFailingWriter(handle)
+        return handle
+
+    monkeypatch.setattr(Path, "open", patched_open)
+    with pytest.raises(build.ReleaseError, match="partial output retained fail-closed"):
+        build.exclusive_write(destination, b"new payload")
+    assert destination.read_bytes() == b"foreign replacement"

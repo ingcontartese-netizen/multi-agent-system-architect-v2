@@ -20,7 +20,7 @@
   },
   "qualification": {
     "pytest_passed": 164,
-    "release_tool_tests": 47,
+    "release_tool_tests": 48,
     "security_matrix_cases": 293,
     "quick_validate_files": 70,
     "secret_scan_patterns": 15,
