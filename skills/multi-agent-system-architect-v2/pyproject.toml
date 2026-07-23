@@ -5,7 +5,7 @@ license = "Apache-2.0"
 license-files = ["LICENSE.txt"]
 requires-python = ">=3.10"
 dependencies = [
-  "PyYAML>=6.0,<7",
+  "PyYAML>=6.0.3,<7",
   "jsonschema>=4.20,<5",
 ]
 
