@@ -1,0 +1,44 @@
+schema_version: '2.0'
+document_status: draft
+decision_id: ''
+requirement_id: ''
+object_categories: []
+classification:
+  mode: null
+  autonomy: null
+  risk: null
+necessity_gate:
+  direct_model_or_existing_tool:
+    sufficient: null
+    evidence: []
+  deterministic_workflow:
+    sufficient: null
+    evidence: []
+  bounded_single_agent:
+    sufficient: null
+    evidence: []
+  hats_without_process_split:
+    sufficient: null
+    evidence: []
+  measurable_separation_benefit:
+    present: null
+    evidence: []
+  mode_c_beats_mode_b:
+    proven: null
+    evidence: []
+separation_candidates: []
+alternatives: []
+decision: ''
+why: ''
+multi_agent_justified: null
+conditions_that_change_decision: []
+verification_needed: []
+exit_strategy: ''
+next_gate: ''
+approval:
+  required: false
+  approver: ''
+  status: not_requested
+contract_version: '2.0'
+contract_refs: []
+owner: ''

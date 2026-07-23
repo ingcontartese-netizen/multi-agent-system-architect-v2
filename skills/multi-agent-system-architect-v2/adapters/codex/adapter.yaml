@@ -1,0 +1,8 @@
+schema_version: "1.0"
+host: "codex"
+canonical_core: "../../"
+discovery_metadata: "agents/openai.yaml"
+observed_global_target: "$HOME/.agents/skills/multi-agent-system-architect-v2"
+observed_project_target: "$REPO_ROOT/.agents/skills/multi-agent-system-architect-v2"
+doctrine_overrides: []
+installation: "forbidden-before-pm-gate"

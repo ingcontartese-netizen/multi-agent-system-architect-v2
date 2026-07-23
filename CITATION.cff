@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this Skill, please cite the repository and tagged release."
+title: "Multi-Agent System Architect V2"
+type: software
+version: 2.1.2
+date-released: 2026-07-23
+authors:
+  - name: Giuseppe (ingcontartese-netizen)
+repository-code: "https://github.com/ingcontartese-netizen/multi-agent-system-architect-v2"
+url: "https://github.com/ingcontartese-netizen/multi-agent-system-architect-v2"
+license: Apache-2.0

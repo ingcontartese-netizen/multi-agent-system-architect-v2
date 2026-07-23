@@ -1,0 +1,858 @@
+schema_version: '2.0'
+profile_id: MASA-V2-PUBLIC-FAULT-AND-MUTATION-REGISTRY
+status: PUBLIC_WHITE_BOX_FROZEN
+evaluation_lane: PUBLIC_WHITE_BOX
+candidate_visibility: EXCLUDED_FROM_SEALED_BEHAVIORAL
+oracle_visibility: PUBLIC_WHITE_BOX
+fault_counts:
+  E1: 15
+  E2: 17
+  E3: 15
+  total: 47
+fault_scenarios:
+  E1:
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-NO_START
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'NO_START' at the state-machine boundary encoded by scenario_id
+      F2-E1-NO_START; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-EVENT_LOSS
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'EVENT_LOSS' at the state-machine boundary encoded by scenario_id
+      F2-E1-EVENT_LOSS; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-DUPLICATE_EVENT
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'DUPLICATE_EVENT' at the state-machine boundary encoded
+      by scenario_id F2-E1-DUPLICATE_EVENT; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-DUPLICATE_ID
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'DUPLICATE_ID' at the state-machine boundary encoded by
+      scenario_id F2-E1-DUPLICATE_ID; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-OUT_OF_ORDER
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'OUT_OF_ORDER' at the state-machine boundary encoded by
+      scenario_id F2-E1-OUT_OF_ORDER; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-STALE_MAX
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'STALE_MAX' at the state-machine boundary encoded by scenario_id
+      F2-E1-STALE_MAX; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-WRITER_COLLISION
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'WRITER_COLLISION' at the state-machine boundary encoded
+      by scenario_id F2-E1-WRITER_COLLISION; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-LOCK_CONTENTION
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'LOCK_CONTENTION' at the state-machine boundary encoded
+      by scenario_id F2-E1-LOCK_CONTENTION; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-SLEEP
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'SLEEP' at the state-machine boundary encoded by scenario_id
+      F2-E1-SLEEP; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-PROCESS_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'PROCESS_CRASH' at the state-machine boundary encoded by
+      scenario_id F2-E1-PROCESS_CRASH; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-DOUBLE_WATCHER
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'DOUBLE_WATCHER' at the state-machine boundary encoded by
+      scenario_id F2-E1-DOUBLE_WATCHER; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-HEARTBEAT_NO_PROGRESS
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'HEARTBEAT_NO_PROGRESS' at the state-machine boundary encoded
+      by scenario_id F2-E1-HEARTBEAT_NO_PROGRESS; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-TIMEOUT_NO_EVENT
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'TIMEOUT_NO_EVENT' at the state-machine boundary encoded
+      by scenario_id F2-E1-TIMEOUT_NO_EVENT; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-WATCHER_DISCONNECT
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'WATCHER_DISCONNECT' at the state-machine boundary encoded
+      by scenario_id F2-E1-WATCHER_DISCONNECT; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Physical MAX, unique strictly increasing live tail, exact once-consume semantics and readback govern.
+    public_white_box_expected_owner: relay_ledger_owner
+    scenario_id: F2-E1-OVERFLOW
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Re-read the physical queue, reconcile cursor and dedup state, preserve collisions, then resume once.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'OVERFLOW' at the state-machine boundary encoded by scenario_id
+      F2-E1-OVERFLOW; retain pre/post state, attempt_id and effect classification.
+  E2:
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-ACTIVE_TO_RENEWAL_REQUESTED_PRE_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'ACTIVE_TO_RENEWAL_REQUESTED_PRE_CRASH' at the state-machine
+      boundary encoded by scenario_id F2-E2-ACTIVE_TO_RENEWAL_REQUESTED_PRE_CRASH; retain pre/post state, attempt_id and effect
+      classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-ACTIVE_TO_RENEWAL_REQUESTED_POST_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'ACTIVE_TO_RENEWAL_REQUESTED_POST_CRASH' at the state-machine
+      boundary encoded by scenario_id F2-E2-ACTIVE_TO_RENEWAL_REQUESTED_POST_CRASH; retain pre/post state, attempt_id and
+      effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-RENEWAL_REQUESTED_TO_CHECKPOINTED_PRE_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'RENEWAL_REQUESTED_TO_CHECKPOINTED_PRE_CRASH' at the state-machine
+      boundary encoded by scenario_id F2-E2-RENEWAL_REQUESTED_TO_CHECKPOINTED_PRE_CRASH; retain pre/post state, attempt_id
+      and effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-RENEWAL_REQUESTED_TO_CHECKPOINTED_POST_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'RENEWAL_REQUESTED_TO_CHECKPOINTED_POST_CRASH' at the state-machine
+      boundary encoded by scenario_id F2-E2-RENEWAL_REQUESTED_TO_CHECKPOINTED_POST_CRASH; retain pre/post state, attempt_id
+      and effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-CHECKPOINTED_TO_OLD_SESSION_QUIESCED_PRE_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'CHECKPOINTED_TO_OLD_SESSION_QUIESCED_PRE_CRASH' at the
+      state-machine boundary encoded by scenario_id F2-E2-CHECKPOINTED_TO_OLD_SESSION_QUIESCED_PRE_CRASH; retain pre/post
+      state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-CHECKPOINTED_TO_OLD_SESSION_QUIESCED_POST_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'CHECKPOINTED_TO_OLD_SESSION_QUIESCED_POST_CRASH' at the
+      state-machine boundary encoded by scenario_id F2-E2-CHECKPOINTED_TO_OLD_SESSION_QUIESCED_POST_CRASH; retain pre/post
+      state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-OLD_SESSION_QUIESCED_TO_NEW_SESSION_STARTED_PRE_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'OLD_SESSION_QUIESCED_TO_NEW_SESSION_STARTED_PRE_CRASH'
+      at the state-machine boundary encoded by scenario_id F2-E2-OLD_SESSION_QUIESCED_TO_NEW_SESSION_STARTED_PRE_CRASH; retain
+      pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-OLD_SESSION_QUIESCED_TO_NEW_SESSION_STARTED_POST_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'OLD_SESSION_QUIESCED_TO_NEW_SESSION_STARTED_POST_CRASH'
+      at the state-machine boundary encoded by scenario_id F2-E2-OLD_SESSION_QUIESCED_TO_NEW_SESSION_STARTED_POST_CRASH; retain
+      pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-NEW_SESSION_STARTED_TO_REHYDRATED_PRE_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'NEW_SESSION_STARTED_TO_REHYDRATED_PRE_CRASH' at the state-machine
+      boundary encoded by scenario_id F2-E2-NEW_SESSION_STARTED_TO_REHYDRATED_PRE_CRASH; retain pre/post state, attempt_id
+      and effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-NEW_SESSION_STARTED_TO_REHYDRATED_POST_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'NEW_SESSION_STARTED_TO_REHYDRATED_POST_CRASH' at the state-machine
+      boundary encoded by scenario_id F2-E2-NEW_SESSION_STARTED_TO_REHYDRATED_POST_CRASH; retain pre/post state, attempt_id
+      and effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-REHYDRATED_TO_CONTINUITY_VERIFIED_PRE_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'REHYDRATED_TO_CONTINUITY_VERIFIED_PRE_CRASH' at the state-machine
+      boundary encoded by scenario_id F2-E2-REHYDRATED_TO_CONTINUITY_VERIFIED_PRE_CRASH; retain pre/post state, attempt_id
+      and effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-REHYDRATED_TO_CONTINUITY_VERIFIED_POST_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'REHYDRATED_TO_CONTINUITY_VERIFIED_POST_CRASH' at the state-machine
+      boundary encoded by scenario_id F2-E2-REHYDRATED_TO_CONTINUITY_VERIFIED_POST_CRASH; retain pre/post state, attempt_id
+      and effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-CONTINUITY_VERIFIED_TO_ACTIVE_PRE_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'CONTINUITY_VERIFIED_TO_ACTIVE_PRE_CRASH' at the state-machine
+      boundary encoded by scenario_id F2-E2-CONTINUITY_VERIFIED_TO_ACTIVE_PRE_CRASH; retain pre/post state, attempt_id and
+      effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-CONTINUITY_VERIFIED_TO_ACTIVE_POST_CRASH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'CONTINUITY_VERIFIED_TO_ACTIVE_POST_CRASH' at the state-machine
+      boundary encoded by scenario_id F2-E2-CONTINUITY_VERIFIED_TO_ACTIVE_POST_CRASH; retain pre/post state, attempt_id and
+      effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-COMPACT
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'COMPACT' at the state-machine boundary encoded by scenario_id
+      F2-E2-COMPACT; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-RESUME
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'RESUME' at the state-machine boundary encoded by scenario_id
+      F2-E2-RESUME; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Exactly one active lease and the seven frozen renewal transitions; no write before continuity proof.
+    public_white_box_expected_owner: session_lease_owner
+    scenario_id: F2-E2-FRESH_SESSION
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Checkpoint, quiesce old session, rehydrate, pass continuity quiz and only then reactivate.
+    public_white_box_expected_risk_class: R3
+    exact_injection: Dispatch the frozen synthetic fault operator 'FRESH_SESSION' at the state-machine boundary encoded by
+      scenario_id F2-E2-FRESH_SESSION; retain pre/post state, attempt_id and effect classification.
+  E3:
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-TIMEOUT_PRE_EFFECT
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'TIMEOUT_PRE_EFFECT' at the state-machine boundary encoded
+      by scenario_id F2-E3-TIMEOUT_PRE_EFFECT; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-TIMEOUT_POST_POSSIBLE_EFFECT
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'TIMEOUT_POST_POSSIBLE_EFFECT' at the state-machine boundary
+      encoded by scenario_id F2-E3-TIMEOUT_POST_POSSIBLE_EFFECT; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-RATE_LIMIT_RETRY_AFTER
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'RATE_LIMIT_RETRY_AFTER' at the state-machine boundary encoded
+      by scenario_id F2-E3-RATE_LIMIT_RETRY_AFTER; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-RATE_LIMIT_NO_RETRY_AFTER
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'RATE_LIMIT_NO_RETRY_AFTER' at the state-machine boundary
+      encoded by scenario_id F2-E3-RATE_LIMIT_NO_RETRY_AFTER; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-HTTP_5XX
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'HTTP_5XX' at the state-machine boundary encoded by scenario_id
+      F2-E3-HTTP_5XX; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-DISCONNECT
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'DISCONNECT' at the state-machine boundary encoded by scenario_id
+      F2-E3-DISCONNECT; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-PROCESS_KILL
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'PROCESS_KILL' at the state-machine boundary encoded by
+      scenario_id F2-E3-PROCESS_KILL; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-PARTIAL_OUTPUT
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'PARTIAL_OUTPUT' at the state-machine boundary encoded by
+      scenario_id F2-E3-PARTIAL_OUTPUT; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-AUTH_NON_RETRYABLE
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'AUTH_NON_RETRYABLE' at the state-machine boundary encoded
+      by scenario_id F2-E3-AUTH_NON_RETRYABLE; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-BILLING_NON_RETRYABLE
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'BILLING_NON_RETRYABLE' at the state-machine boundary encoded
+      by scenario_id F2-E3-BILLING_NON_RETRYABLE; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-RESPONSE_READBACK_CONTRADICTION
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'RESPONSE_READBACK_CONTRADICTION' at the state-machine boundary
+      encoded by scenario_id F2-E3-RESPONSE_READBACK_CONTRADICTION; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-BREAKER_ALERT
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'BREAKER_ALERT' at the state-machine boundary encoded by
+      scenario_id F2-E3-BREAKER_ALERT; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-KILL_SWITCH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'KILL_SWITCH' at the state-machine boundary encoded by scenario_id
+      F2-E3-KILL_SWITCH; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-SUPERVISOR_DEATH
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'SUPERVISOR_DEATH' at the state-machine boundary encoded
+      by scenario_id F2-E3-SUPERVISOR_DEATH; retain pre/post state, attempt_id and effect classification.
+  - public_white_box_oracle_contract: Classify effect as NO_EFFECT, EFFECT_CONFIRMED or STATE_UNCERTAIN; never silently fail over or blind-retry.
+    public_white_box_expected_owner: external_recovery_supervisor
+    scenario_id: F2-E3-HISTORICAL_PROVIDER_LIMIT_HANDOFF_GAP_REPLAY
+    evidence_level:
+      before_execution: source_verified_synthetic_fixture
+      required_after_execution: tool_verified
+    public_white_box_expected_recovery: Use idempotency/readback when available; otherwise open breaker, preserve attempt and escalate PM_REQUIRED.
+    public_white_box_expected_risk_class: R4
+    exact_injection: Dispatch the frozen synthetic fault operator 'HISTORICAL_PROVIDER_LIMIT_HANDOFF_GAP_REPLAY' at the state-machine
+      boundary encoded by scenario_id F2-E3-HISTORICAL_PROVIDER_LIMIT_HANDOFF_GAP_REPLAY; retain pre/post state, attempt_id
+      and effect classification.
+mutation_count: 32
+public_white_box_mutation_pass_rule: 32/32 means every frozen mutant is injected, the affected deterministic test path is executed, and that
+  test path kills the mutant. Merely proposing or generating a mutant is not a pass.
+public_white_box_mutation_survivor_rule: Any surviving, unexecuted, invalid, timed-out or aborted mutant fails the non-compensatory gate.
+public_white_box_mutation_timeout_or_abort: The affected mutant is NOT_KILLED and the 32/32 gate fails.
+mutants:
+- deterministic_test_id: V2-MUT-01
+  public_white_box_kill_oracle: missing human-sovereign authority is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: remove_human_sovereign
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_01
+  injection_operator: delete required authority field
+  mutation_id: MUT-01
+  target_locator: templates/REQUIREMENTS.yaml#/authority/human_sovereign
+- deterministic_test_id: V2-MUT-02
+  public_white_box_kill_oracle: model self-approval is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: allow_model_self_approval
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_02
+  injection_operator: replace human with model
+  mutation_id: MUT-02
+  target_locator: templates/AUTONOMY_RISK_ENVELOPE.yaml#/approval/actor_type
+- deterministic_test_id: V2-MUT-03
+  public_white_box_kill_oracle: unbound approval is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: approval_not_bound_to_exact_action_or_target
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_03
+  injection_operator: drop exact action and target
+  mutation_id: MUT-03
+  target_locator: templates/TOOL_CONTRACT.yaml#/approval_binding
+- deterministic_test_id: V2-MUT-04
+  public_white_box_kill_oracle: expired approval is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: skip_approval_expiry_check
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_04
+  injection_operator: bypass expiry comparison
+  mutation_id: MUT-04
+  target_locator: templates/AUTONOMY_RISK_ENVELOPE.yaml#/approval/expires_at
+- deterministic_test_id: V2-MUT-05
+  public_white_box_kill_oracle: R4 downgrade is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: downgrade_r4_without_human_decision
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_05
+  injection_operator: downgrade R4 to R2
+  mutation_id: MUT-05
+  target_locator: templates/AUTONOMY_RISK_ENVELOPE.yaml#/risk/R4
+- deterministic_test_id: V2-MUT-06
+  public_white_box_kill_oracle: undeclared role inversion is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: omit_role_inversion_log
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_06
+  injection_operator: discard inversion ledger entry
+  mutation_id: MUT-06
+  target_locator: templates/RUN_MANIFEST.yaml#/role_inversions
+- deterministic_test_id: V2-MUT-07
+  public_white_box_kill_oracle: non-independent verification is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: reuse_builder_as_independent_verifier
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_07
+  injection_operator: set verifier equal to builder
+  mutation_id: MUT-07
+  target_locator: templates/AGENT_HAT.yaml#/independence
+- deterministic_test_id: V2-MUT-08
+  public_white_box_kill_oracle: consensus without evidence cannot satisfy a hard gate
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: treat_consensus_as_truth
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_08
+  injection_operator: replace evidence gate with consensus
+  mutation_id: MUT-08
+  target_locator: templates/ACCEPTANCE_PLAN.md#Evidence hierarchy
+- deterministic_test_id: V2-MUT-09
+  public_white_box_kill_oracle: physical queue MAX remains authoritative
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: trust_event_hint_instead_of_physical_max
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_09
+  injection_operator: replace physical MAX with event hint
+  mutation_id: MUT-09
+  target_locator: references/10_verifier_playbook.md#Shared relay
+- deterministic_test_id: V2-MUT-10
+  public_white_box_kill_oracle: duplicate live-tail IDs are rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: accept_duplicate_message_id
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_10
+  injection_operator: accept duplicate live-tail ID
+  mutation_id: MUT-10
+  target_locator: scripts/gc_state_simulator.py#relay_unique_id
+- deterministic_test_id: V2-MUT-11
+  public_white_box_kill_oracle: non-increasing live-tail order is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: process_out_of_order_queue
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_11
+  injection_operator: sort or consume out of physical order
+  mutation_id: MUT-11
+  target_locator: scripts/gc_state_simulator.py#relay_order
+- deterministic_test_id: V2-MUT-12
+  public_white_box_kill_oracle: cursor advance without readback is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: advance_cursor_before_readback
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_12
+  injection_operator: advance cursor before readback
+  mutation_id: MUT-12
+  target_locator: scripts/gc_state_simulator.py#cursor_readback
+- deterministic_test_id: V2-MUT-13
+  public_white_box_kill_oracle: more than one active writer lease is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: permit_dual_writer_lease
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_13
+  injection_operator: allow two active writer leases
+  mutation_id: MUT-13
+  target_locator: scripts/gc_state_simulator.py#writer_lease
+- deterministic_test_id: V2-MUT-14
+  public_white_box_kill_oracle: renewal without continuity proof is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: renew_session_without_continuity_proof
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_14
+  injection_operator: skip continuity proof
+  mutation_id: MUT-14
+  target_locator: scripts/gc_state_simulator.py#renewal_quiz
+- deterministic_test_id: V2-MUT-15
+  public_white_box_kill_oracle: uncertain effects require readback or escalation
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: blind_retry_state_uncertain_effect
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_15
+  injection_operator: retry possible-effect operation blindly
+  mutation_id: MUT-15
+  target_locator: scripts/gc_state_simulator.py#state_uncertain
+- deterministic_test_id: V2-MUT-16
+  public_white_box_kill_oracle: unannounced provider failover is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: silent_provider_failover
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_16
+  injection_operator: remove declaration gate
+  mutation_id: MUT-16
+  target_locator: references/05_runtime_state_bridge_data_security_and_reliability.md#provider_failover
+- deterministic_test_id: V2-MUT-17
+  public_white_box_kill_oracle: candidate knowledge cannot auto-promote
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: auto_promote_candidate_lesson
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_17
+  injection_operator: auto-promote candidate lesson
+  mutation_id: MUT-17
+  target_locator: templates/MEMORY_RETRIEVAL_POLICY.md#promotion
+- deterministic_test_id: V2-MUT-18
+  public_white_box_kill_oracle: claims without source locator and hash are rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: drop_source_locator_or_hash
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_18
+  injection_operator: remove locator and hash
+  mutation_id: MUT-18
+  target_locator: templates/PROVENANCE_MANIFEST.json#/claims/*/source
+- deterministic_test_id: V2-MUT-19
+  public_white_box_kill_oracle: retrieved content remains untrusted data
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: trust_retrieved_text_as_instruction
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_19
+  injection_operator: treat retrieved text as instruction
+  mutation_id: MUT-19
+  target_locator: templates/MEMORY_RETRIEVAL_POLICY.md#trust_boundary
+- deterministic_test_id: V2-MUT-20
+  public_white_box_kill_oracle: unresolved conflicts must remain explicit
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: silently_collapse_source_conflict
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_20
+  injection_operator: collapse unresolved conflict
+  mutation_id: MUT-20
+  target_locator: templates/PROVENANCE_MANIFEST.json#/conflicts
+- deterministic_test_id: V2-MUT-21
+  public_white_box_kill_oracle: secret-like fixture content is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: insert_real_secret_in_fixture_or_trace
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_21
+  injection_operator: insert real-secret signature
+  mutation_id: MUT-21
+  target_locator: evals/v2_behavioral_inputs.yaml#fixture_secret_scan
+- deterministic_test_id: V2-MUT-22
+  public_white_box_kill_oracle: cross-context data leakage is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: cross_tenant_or_context_leak
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_22
+  injection_operator: reuse foreign context
+  mutation_id: MUT-22
+  target_locator: templates/MEMORY_RETRIEVAL_POLICY.md#tenant_scope
+- deterministic_test_id: V2-MUT-23
+  public_white_box_kill_oracle: unbounded tool targets are rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: use_unbounded_tool_target
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_23
+  injection_operator: replace bounded target with wildcard
+  mutation_id: MUT-23
+  target_locator: templates/TOOL_CONTRACT.yaml#/target_scope
+- deterministic_test_id: V2-MUT-24
+  public_white_box_kill_oracle: superseded evidence must remain append-only
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: delete_superseded_evidence_history
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_24
+  injection_operator: delete superseded evidence
+  mutation_id: MUT-24
+  target_locator: templates/PROVENANCE_MANIFEST.json#/supersession
+- deterministic_test_id: V2-MUT-25
+  public_white_box_kill_oracle: semantically empty artifacts are rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: accept_semantically_empty_json
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_25
+  injection_operator: accept empty object
+  mutation_id: MUT-25
+  target_locator: assets/schemas/contracts.schema.json#semantic_minimum
+- deterministic_test_id: V2-MUT-26
+  public_white_box_kill_oracle: hybrid version artifacts are rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: accept_v1_v2_hybrid
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_26
+  injection_operator: accept V1/V2 hybrid
+  mutation_id: MUT-26
+  target_locator: assets/schemas/contracts.schema.json#version_dispatch
+- deterministic_test_id: V2-MUT-27
+  public_white_box_kill_oracle: any shrinkage of the exact 36-case public fixture denominator is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: shrink_public_behavioral_case_denominator
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_27
+  injection_operator: remove one required F2-BHV case and shrink the declared count
+  mutation_id: MUT-27
+  target_locator: scripts/eval_corpus_check.py#expected_case_ids
+- deterministic_test_id: V2-MUT-28
+  public_white_box_kill_oracle: post-output threshold drift is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: change_threshold_after_candidate_output
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_28
+  injection_operator: allow post-output threshold edit
+  mutation_id: MUT-28
+  target_locator: templates/ACCEPTANCE_PLAN.md#threshold_lock
+- deterministic_test_id: V2-MUT-29
+  public_white_box_kill_oracle: the public checker rejects failure outcomes that omit TIMEOUT or ABORTED
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: ignore_timeout_or_abort
+  planned_test_locator: tests/test_evals.py::test_v2_mut_29
+  injection_operator: remove TIMEOUT and ABORTED from failure_outcomes
+  mutation_id: MUT-29
+  target_locator: evals/control_vocabulary.yaml#/v2/failure_outcomes
+- deterministic_test_id: V2-MUT-30
+  public_white_box_kill_oracle: unbounded calls or cost are rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: remove_call_or_cost_bound
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_30
+  injection_operator: remove call and cost bound
+  mutation_id: MUT-30
+  target_locator: templates/AUTONOMY_RISK_ENVELOPE.yaml#/budgets
+- deterministic_test_id: V2-MUT-31
+  public_white_box_kill_oracle: installation without parity and readback is rejected
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: install_without_parity_or_readback
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_31
+  injection_operator: skip parity and readback
+  mutation_id: MUT-31
+  target_locator: references/09_interoperability_and_host_portability.md#install_gate
+- deterministic_test_id: V2-MUT-32
+  public_white_box_kill_oracle: rollback requires exact V1 tree and smoke
+  public_white_box_required_lifecycle:
+  - INJECTED
+  - EXECUTED
+  - KILLED
+  fault: rollback_without_exact_v1_tree_and_smoke
+  planned_test_locator: tests/test_scripts.py::test_v2_mut_32
+  injection_operator: skip V1 tree and smoke
+  mutation_id: MUT-32
+  target_locator: templates/EVOLUTION_PROPOSAL.yaml#rollback

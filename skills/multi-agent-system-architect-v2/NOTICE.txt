@@ -1,0 +1,13 @@
+Multi-Agent System Architect V2
+Copyright 2026 Giuseppe (ingcontartese-netizen)
+
+Official repository:
+https://github.com/ingcontartese-netizen/multi-agent-system-architect-v2
+
+This product was developed with assistance from OpenAI Codex and Anthropic
+Claude Code and was exercised on Google Antigravity. Those systems were used as
+development and verification tools and are not copyright holders or licensors.
+
+OpenAI, Codex, Anthropic, Claude, Google, Antigravity, Cursor, and other product
+names are trademarks of their respective owners. Their mention describes
+interoperability surfaces only and does not imply endorsement or certification.

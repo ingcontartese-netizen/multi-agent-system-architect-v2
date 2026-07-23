@@ -1,0 +1,41 @@
+schema_version: '2.0'
+document_status: draft
+tool_id: ''
+version: ''
+owner: ''
+purpose: ''
+input_schema: {}
+output_schema: {}
+bounded_result:
+  maximum_items: null
+  maximum_bytes: null
+read_or_write: null
+classification:
+  risk: null
+allowed_targets: []
+forbidden_targets: []
+idempotency:
+  required: false
+  key_field: ''
+timeout_and_cancellation:
+  timeout_seconds: null
+  cancellable: true
+dry_run:
+  supported: false
+  contract: ''
+errors: []
+retry_policy:
+  maximum_attempts: 0
+  retryable_errors: []
+  backoff: ''
+approval_policy:
+  required: false
+  class: ''
+  draft_tool: ''
+  commit_tool: ''
+provenance_and_audit:
+  run_id_field: ''
+  audit_id_field: ''
+  source_fields: []
+contract_version: '2.0'
+contract_refs: []

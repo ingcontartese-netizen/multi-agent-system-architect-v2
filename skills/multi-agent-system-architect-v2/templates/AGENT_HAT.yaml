@@ -1,0 +1,50 @@
+schema_version: '2.0'
+document_status: draft
+hat_id: ''
+owner: ''
+purpose: ''
+inputs: []
+knowledge_scope: []
+allowed_tools: []
+forbidden_actions: []
+output_contract:
+  schema: ''
+  artifact_type: ''
+  bounded: true
+success_checks: []
+classification:
+  risk: null
+budget:
+  model_calls: null
+  tool_calls: null
+  tokens: null
+  wall_time_seconds: null
+stop_conditions: []
+escalation:
+  target: ''
+  conditions: []
+handoff:
+  receiver_contract_ref: null
+  acceptance_criteria: []
+  rejection_criteria: []
+  inherited_risks: []
+  next_authority: null
+  acknowledgement_state: pending
+  rejection_evidence: []
+process_boundary:
+  separate_agent: false
+  justification: ''
+inherits_powers: false
+contract_version: '2.0'
+contract_refs: []
+responsibility:
+  roles:
+    producer: null
+    verifier: null
+    approver: null
+    operator: null
+    authority: null
+  separation_rule: null
+  escalation_owner: null
+  expires_at: null
+  successor: null

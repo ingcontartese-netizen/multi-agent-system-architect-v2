@@ -1,0 +1,4 @@
+interface:
+  display_name: "Multi-Agent System Architect V2"
+  short_description: "Build governed agentic systems with proof"
+  default_prompt: "Use $multi-agent-system-architect-v2 on this host independently to choose and build the smallest governed agentic architecture. Add local agents or cross-host collaboration only when the necessity gate or human request justifies it, then verify with explicit evidence."

@@ -1,0 +1,26 @@
+[project]
+name = "multi-agent-system-architect-v2-tools"
+version = "2.1.2"
+license = "Apache-2.0"
+license-files = ["LICENSE.txt"]
+requires-python = ">=3.10"
+dependencies = [
+  "PyYAML>=6.0,<7",
+  "jsonschema>=4.20,<5",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+
+[tool.setuptools]
+packages = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-p no:cacheprovider"
+markers = [
+  "v1_regression: frozen V1 contract and behavioral compatibility",
+  "v2_contract: V2 contracts, public registries, and migration behavior",
+  "mutation: deterministic injected-executed-killed mutation checks",
+]

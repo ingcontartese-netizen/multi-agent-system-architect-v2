@@ -1,0 +1,61 @@
+schema_version: '2.0'
+document_status: draft
+envelope_id: ''
+owner: ''
+classification:
+  mode: null
+  autonomy: null
+  risk: null
+scope:
+  allowed_goals: []
+  forbidden_goals: []
+  allowed_targets: []
+trigger:
+  types: []
+  deduplication_key: ''
+  missed_schedule_policy: null
+durable_state:
+  store: ''
+  checkpoint_policy: ''
+  heartbeat_seconds: null
+  lease_seconds: null
+budgets:
+  model_calls: null
+  tool_calls: null
+  wall_time_seconds: null
+  money: null
+  artifacts: null
+  repair_cycles: 2
+controls:
+  sandbox: ''
+  egress_policy: ''
+  identity: ''
+  secret_broker: ''
+  idempotency_required: true
+  cancellation_required: true
+side_effects:
+  draft_tools: []
+  commit_tools: []
+approvals:
+  required_for: []
+  approvers: []
+  expiry_seconds: null
+  decisions:
+  - approve
+  - edit
+  - reject
+  - defer
+inherited_risks: []
+stop_conditions: []
+recovery:
+  retry_policy: ''
+  compensation: ''
+  dead_letter: ''
+  disaster_recovery: ''
+kill_switch:
+  owner: ''
+  mechanism: ''
+  tested_at: null
+maximum_unattended_seconds: null
+contract_version: '2.0'
+contract_refs: []

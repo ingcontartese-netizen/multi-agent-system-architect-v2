@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "release": {
+    "name": "Multi-Agent System Architect V2",
+    "version": "2.1.2",
+    "tag": "v2.1.2",
+    "channel": "public",
+    "license": "Apache-2.0",
+    "status": "released"
+  },
+  "skill": {
+    "name": "multi-agent-system-architect-v2",
+    "path": "skills/multi-agent-system-architect-v2",
+    "files": 70,
+    "bytes": 1139811,
+    "source_tree_sha256": "4552AE02D0D4C55B82E3DAC93E7429E0BE40EF954C4278098E90FC71716A3992",
+    "public_tree_sha256": "AF96D6A9140BFB75F367645B82450FE853446805D513793C1545C5F79C3352A0",
+    "physical_tree_algorithm": "release-physical-tree-v1",
+    "physical_tree_sha256": "41D2F3140960C981A7CDD4ED7180B5A9BC256D7173FE13C090B17A5D52D488E8"
+  },
+  "qualification": {
+    "pytest_passed": 164,
+    "release_tool_tests": 47,
+    "security_matrix_cases": 293,
+    "quick_validate_files": 70,
+    "secret_scan_patterns": 15,
+    "secret_scan_findings": 0,
+    "behavioral_inputs": 36,
+    "fault_scenarios": 47,
+    "mutation_registry": 32,
+    "builder_runtime": "CPython 3.14.3 on Windows",
+    "archive_reproducibility_runtimes": [
+      "CPython 3.12.13",
+      "CPython 3.14.3"
+    ],
+    "network_access_during_payload_validation": "disabled"
+  },
+  "compatibility": {
+    "codex": "packaged; exact-2.1.2 live gate pending",
+    "claude_code": "packaged; exact-2.1.2 live gate pending",
+    "claude_cowork": "account ZIP carrier provided; exact-2.1.2 live gate pending",
+    "antigravity": "packaged; exact-2.1.2 live gate pending",
+    "cursor": "Agent Skills format-compatible; live gate not claimed"
+  },
+  "verification": {
+    "builder": "pass",
+    "independent_terminal_gate": "pass_with_post_publish_url_gate"
+  },
+  "assets": {
+    "skill_zip": {
+      "filename": "multi-agent-system-architect-v2-2.1.2.zip",
+      "format": "deterministic-zip-stored",
+      "root_directory": "multi-agent-system-architect-v2",
+      "sha256": "63219FDF183460C224168F0B4639E3A88A1D91E1169B9A263751771921DDA2A7"
+    }
+  }
+}

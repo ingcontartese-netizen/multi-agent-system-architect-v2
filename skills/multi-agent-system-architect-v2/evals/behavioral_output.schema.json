@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-skills.example.invalid/schemas/multi-agent-system-architect-behavioral-output-v2.json",
+  "title": "Blind behavioral evaluation output, V1-compatible V2 dispatcher",
+  "oneOf": [
+    {"$ref": "#/$defs/v1BehavioralOutput"},
+    {"$ref": "#/$defs/v2BehavioralOutput"}
+  ],
+  "$defs": {
+    "v1BehavioralOutput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "status",
+        "scope_decision",
+        "architecture_mode",
+        "autonomy_level",
+        "risk_class",
+        "system_shape",
+        "controls",
+        "blocked_actions",
+        "artifacts",
+        "next_gate",
+        "provenance"
+      ],
+      "properties": {
+        "case_id": {"type": "string", "pattern": "^EV(0[1-9]|1[0-9]|20)$"},
+        "status": {"enum": ["done", "needs_review", "blocked"]},
+        "scope_decision": {"enum": ["no-system", "deterministic-workflow", "single-agent", "multi-agent", "privileged-procedure"]},
+        "architecture_mode": {"enum": ["A", "B", "C"]},
+        "autonomy_level": {"enum": ["AU0", "AU1", "AU2", "AU3", "AU4", "AU5"]},
+        "risk_class": {"enum": ["R0", "R1", "R2", "R3", "R4", "R5"]},
+        "system_shape": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 800,
+          "description": "Describe the authorized shape in one or two concise sentences, no more than 800 characters."
+        },
+        "controls": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "blocked_actions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "artifacts": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "next_gate": {"type": "string", "minLength": 4, "maxLength": 300},
+        "provenance": {"$ref": "#/$defs/v1Provenance"}
+      }
+    },
+    "v1Provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sources_read", "sections_consulted", "model_synthesis", "limits"],
+      "properties": {
+        "sources_read": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+        "sections_consulted": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+        "model_synthesis": {"type": "string", "minLength": 8},
+        "limits": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "v2BehavioralOutput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "case_id",
+        "attempt_id",
+        "candidate_state",
+        "scoring_state",
+        "classification",
+        "hard_decisions",
+        "governed_artifact",
+        "owner",
+        "evidence_level",
+        "state_transition",
+        "recovery_decision",
+        "approvals_required",
+        "unknowns",
+        "external_effects_performed",
+        "provenance"
+      ],
+      "properties": {
+        "schema_version": {"const": "2.0"},
+        "case_id": {
+          "type": "string",
+          "pattern": "^F2-BHV-(00[1-9]|0[12][0-9]|03[0-6])$"
+        },
+        "attempt_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{7,127}$"
+        },
+        "candidate_state": {"const": "CANDIDATE_UNSCORED"},
+        "scoring_state": {"const": "BLOCKED_UNTIL_CANDIDATE_FREEZE_AND_REVEAL"},
+        "classification": {"$ref": "#/$defs/v2Classification"},
+        "hard_decisions": {"$ref": "#/$defs/v2HardDecisions"},
+        "governed_artifact": {"$ref": "#/$defs/v2GovernedArtifact"},
+        "owner": {"type": "string", "minLength": 3, "maxLength": 120},
+        "evidence_level": {"$ref": "#/$defs/v2EvidenceLevel"},
+        "state_transition": {"$ref": "#/$defs/v2StateTransition"},
+        "recovery_decision": {"$ref": "#/$defs/v2RecoveryDecision"},
+        "approvals_required": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 3, "maxLength": 200},
+          "uniqueItems": true
+        },
+        "unknowns": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 3, "maxLength": 300},
+          "uniqueItems": true
+        },
+        "external_effects_performed": {"const": false},
+        "provenance": {"$ref": "#/$defs/v2Provenance"}
+      }
+    },
+    "v2Classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope_decision", "architecture_mode", "autonomy_level", "risk_class"],
+      "properties": {
+        "scope_decision": {"enum": ["no-system", "deterministic-workflow", "single-agent", "multi-agent", "privileged-procedure"]},
+        "architecture_mode": {"enum": ["A", "B", "C"]},
+        "autonomy_level": {"enum": ["AU0", "AU1", "AU2", "AU3", "AU4", "AU5"]},
+        "risk_class": {"enum": ["R0", "R1", "R2", "R3", "R4", "R5"]}
+      }
+    },
+    "v2HardDecisions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["route", "hard_gate", "evidence_recovery"],
+      "properties": {
+        "route": {"$ref": "#/$defs/v2HardDecisionBody"},
+        "hard_gate": {"$ref": "#/$defs/v2HardDecisionBody"},
+        "evidence_recovery": {"$ref": "#/$defs/v2HardDecisionBody"}
+      }
+    },
+    "v2HardDecisionBody": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "rationale"],
+      "properties": {
+        "decision": {"type": "string", "minLength": 1, "maxLength": 160},
+        "rationale": {"type": "string", "minLength": 8, "maxLength": 1200}
+      }
+    },
+    "v2GovernedArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_type", "artifact_id", "summary"],
+      "properties": {
+        "artifact_type": {"type": "string", "minLength": 3, "maxLength": 100},
+        "artifact_id": {"type": "string", "minLength": 3, "maxLength": 160},
+        "summary": {"type": "string", "minLength": 12, "maxLength": 1600}
+      }
+    },
+    "v2EvidenceLevel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input", "claim"],
+      "properties": {
+        "input": {"const": "source_verified_synthetic_fixture"},
+        "claim": {"enum": ["observed", "source_verified", "tool_verified", "live_verified", "human_baptized"]}
+      }
+    },
+    "v2StateTransition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from_state", "to_state", "effect_classification"],
+      "properties": {
+        "from_state": {"type": "string", "minLength": 1, "maxLength": 120},
+        "to_state": {"type": "string", "minLength": 1, "maxLength": 120},
+        "effect_classification": {"enum": ["NO_EFFECT", "EFFECT_CONFIRMED", "STATE_UNCERTAIN", "NOT_APPLICABLE"]}
+      }
+    },
+    "v2RecoveryDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "retry_authorized", "evidence"],
+      "properties": {
+        "action": {"type": "string", "minLength": 3, "maxLength": 600},
+        "retry_authorized": {"type": "boolean"},
+        "evidence": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 3, "maxLength": 300},
+          "uniqueItems": true
+        }
+      }
+    },
+    "v2Provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sources_read", "sections_consulted", "evidence_ids", "model_synthesis", "limits"],
+      "properties": {
+        "sources_read": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+        "sections_consulted": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+        "model_synthesis": {"type": "string", "minLength": 8},
+        "limits": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+schema_version: '2.0'
+document_status: draft
+requirement_id: ''
+authority:
+  owner: ''
+  human_sovereign: ''
+  source_order: []
+goal:
+  outcome: ''
+  beneficiary: ''
+  horizon: ''
+users_and_tenants: []
+inputs: []
+outputs: []
+side_effects: []
+data:
+  sensitivity: unknown
+  categories: []
+  retention: ''
+  deletion: ''
+  residency: ''
+latency_and_duration:
+  interactive_target_ms: null
+  maximum_run_seconds: null
+  may_outlive_session: null
+volume_and_concurrency:
+  expected_runs_per_day: null
+  peak_concurrency: null
+  tenant_isolation_required: null
+human_approval:
+  required_actions: []
+  approvers: []
+  expiry_seconds: null
+existing_stack: []
+constraints:
+  self_host_or_cloud: ''
+  required_languages: []
+  required_protocols: []
+  prohibited_dependencies: []
+budget:
+  currency: USD
+  maximum_per_run: null
+  maximum_per_month: null
+  token_limit: null
+  wall_time_seconds: null
+success_checks: []
+non_agentic_baseline:
+  approach: ''
+  measured: false
+  evidence: []
+assumptions: []
+unresolved_critical: []
+design_only: true
+contract_version: '2.0'
+contract_refs: []
+non_goals: []
+authoritative_inputs: []
+output_format: ''
+stop_conditions: []
+required_evidence: []
+errors: []

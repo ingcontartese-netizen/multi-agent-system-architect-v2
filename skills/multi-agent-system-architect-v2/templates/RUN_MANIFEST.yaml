@@ -1,0 +1,89 @@
+schema_version: '2.0'
+document_status: draft
+run_id: ''
+tenant_id: ''
+created_at: null
+purpose: ''
+classification:
+  mode: null
+  autonomy: null
+  risk: null
+versions:
+  skill: ''
+  workflow: ''
+  prompt_bundle: ''
+  model_profile: ''
+  tool_schemas: ''
+  policy: ''
+  sandbox: ''
+  eval_dataset: ''
+budgets:
+  model_calls:
+    limit: null
+    actual: 0
+  tool_calls:
+    limit: null
+    actual: 0
+  tokens:
+    limit: null
+    actual: 0
+  money:
+    currency: USD
+    limit: null
+    actual: 0
+  wall_time_seconds:
+    limit: null
+    actual: 0
+state:
+  current: ''
+  terminal: false
+  checkpoint: ''
+artifacts: []
+approvals: []
+human_interventions: []
+trace:
+  trace_id: ''
+  spans_expected: []
+  spans_recorded: []
+result:
+  status: pending
+  verified_success: false
+  verification: []
+evidence_level: observed
+contract_version: '2.0'
+contract_refs: []
+owner: ''
+errors: []
+completion:
+  task_done:
+    applicable: false
+    status: not_applicable
+    criteria_ids: []
+    evidence: []
+  output_valid:
+    applicable: false
+    status: not_applicable
+    criteria_ids: []
+    evidence: []
+  artifact_ready:
+    applicable: false
+    status: not_applicable
+    criteria_ids: []
+    evidence: []
+  run_succeeded:
+    applicable: false
+    status: not_applicable
+    criteria_ids: []
+    evidence: []
+  outcome_verified:
+    applicable: false
+    status: not_applicable
+    criteria_ids: []
+    evidence: []
+checkpoint_compatibility:
+  compatibility_matrix: []
+  migration_proof: null
+  invalidation_reason: null
+  authorizer: null
+  original_record_ref: null
+  no_duplicate_effect_evidence: []

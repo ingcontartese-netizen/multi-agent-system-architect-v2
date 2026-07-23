@@ -1,0 +1,148 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: "1"
+  PYTHONUTF8: "1"
+
+jobs:
+  qualification:
+    name: ${{ matrix.os }} / Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+        python-version:
+          - "3.10"
+          - "3.12"
+          - "3.14"
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Skill dependencies and pytest
+        run: python -m pip install --disable-pip-version-check "PyYAML==6.0.3" "jsonschema==4.26.0" "pytest==9.0.3"
+
+      - name: Run full public-release verification
+        run: python -B tools/verify_release.py --repo .
+
+  release-smoke:
+    name: Deterministic release smoke / Ubuntu / Python 3.12 ↔ 3.14
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12.13"
+
+      - name: Install Skill dependencies and pytest on Python 3.12
+        run: python -m pip install --disable-pip-version-check "PyYAML==6.0.3" "jsonschema==4.26.0" "pytest==9.0.3"
+
+      - name: Assert and report Python 3.12 release runtime
+        shell: bash
+        run: |
+          python - <<'PY'
+          import sys
+          import zlib
+
+          expected = (3, 12, 13)
+          print(f"python={sys.version}")
+          print(f"zlib_compile={zlib.ZLIB_VERSION} zlib_runtime={zlib.ZLIB_RUNTIME_VERSION}")
+          if sys.version_info[:3] != expected:
+              raise SystemExit(f"unexpected Python runtime: {sys.version_info[:3]} != {expected}")
+          PY
+
+      - name: Build and verify release on Python 3.12
+        shell: bash
+        run: |
+          set -euo pipefail
+          release_a="${RUNNER_TEMP}/multi-agent-system-architect-v2-release-a"
+          test ! -e "${release_a}"
+
+          python -B tools/build_release.py --repo . --out "${release_a}"
+          python -B tools/verify_release.py --repo . --dist "${release_a}"
+
+      - name: Set up Python 3.14
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.14.3"
+
+      - name: Install Skill dependencies and pytest on Python 3.14
+        run: python -m pip install --disable-pip-version-check "PyYAML==6.0.3" "jsonschema==4.26.0" "pytest==9.0.3"
+
+      - name: Assert and report Python 3.14 release runtime
+        shell: bash
+        run: |
+          python - <<'PY'
+          import sys
+          import zlib
+
+          expected = (3, 14, 3)
+          print(f"python={sys.version}")
+          print(f"zlib_compile={zlib.ZLIB_VERSION} zlib_runtime={zlib.ZLIB_RUNTIME_VERSION}")
+          if sys.version_info[:3] != expected:
+              raise SystemExit(f"unexpected Python runtime: {sys.version_info[:3]} != {expected}")
+          PY
+
+      - name: Build, verify, and compare release on Python 3.14
+        shell: bash
+        run: |
+          set -euo pipefail
+          release_a="${RUNNER_TEMP}/multi-agent-system-architect-v2-release-a"
+          release_b="${RUNNER_TEMP}/multi-agent-system-architect-v2-release-b"
+          test -d "${release_a}"
+          test ! -e "${release_b}"
+
+          python -B tools/build_release.py --repo . --out "${release_b}"
+          python -B tools/verify_release.py --repo . --dist "${release_b}"
+
+          python - "${release_a}" "${release_b}" <<'PY'
+          import hashlib
+          import json
+          import sys
+          from pathlib import Path
+
+          release_a = Path(sys.argv[1])
+          release_b = Path(sys.argv[2])
+          manifest = json.loads(Path("release/PUBLIC_RELEASE_MANIFEST.json").read_text(encoding="utf-8"))
+          archive_name = manifest["assets"]["skill_zip"]["filename"]
+
+          def sha256(path: Path) -> str:
+              digest = hashlib.sha256()
+              with path.open("rb") as handle:
+                  for block in iter(lambda: handle.read(1024 * 1024), b""):
+                      digest.update(block)
+              return digest.hexdigest()
+
+          digest_a = sha256(release_a / archive_name)
+          digest_b = sha256(release_b / archive_name)
+          if digest_a != digest_b:
+              raise SystemExit(f"non-deterministic release ZIP: {digest_a} != {digest_b}")
+          print(f"deterministic release ZIP SHA-256: {digest_a}")
+          PY

@@ -1,0 +1,8 @@
+schema_version: "1.0"
+host: "claude-code"
+canonical_core: "../../"
+discovery_metadata: null
+observed_global_target: "~/.claude/skills/multi-agent-system-architect-v2"
+observed_project_target: "<repo>/.claude/skills/multi-agent-system-architect-v2"
+doctrine_overrides: []
+installation: "forbidden-before-pm-gate"

@@ -1,0 +1,397 @@
+schema_version: "1.0"
+catalog_version: "2026-07-12"
+status: active
+verified_at: "2026-07-12"
+tech_watch:
+  owner: system-architecture-owner
+  cadence_days: 91
+  next_due: "2026-10-11"
+  source_policy: Verify primary documentation and installed capabilities before every high-impact or vendor-critical decision.
+candidates:
+  - id: openai-agents-sdk
+    name: OpenAI Agents SDK
+    object_categories: [agent-framework]
+    planes: [harness-sdk, memory-knowledge, observability-eval, interoperability]
+    languages: [Python]
+    capabilities:
+      agent_loop:
+        status: verified
+        evidence: [openai-agents]
+        notes: Runner manages turns, tools, guardrails, handoffs, and sessions.
+      multi_agent:
+        status: verified
+        evidence: [openai-agents]
+        notes: Manager and handoff patterns are documented.
+      tracing:
+        status: verified
+        evidence: [openai-tracing]
+        notes: Built-in traces cover model calls, tools, handoffs, and guardrails.
+      durable_execution:
+        status: partial
+        evidence: [openai-running, openai-hitl]
+        notes: RunState is serializable; durable orchestration is available through documented integrations rather than implied by an in-memory runner.
+      human_approval:
+        status: verified
+        evidence: [openai-hitl]
+        notes: Tool calls can pause for approve or reject and resume from serialized RunState.
+      sandbox:
+        status: unknown
+        evidence: []
+        notes: No sandbox capability was qualified in this catalog pass.
+    durability:
+      status: partial
+      evidence: [openai-running, openai-hitl]
+      notes: Persisted RunState and external durable integrations require explicit architecture.
+    hitl:
+      status: verified
+      evidence: [openai-hitl]
+      notes: Pause, approval/rejection, serialization, and resume are documented.
+    sandbox:
+      status: unknown
+      evidence: []
+      notes: Must be verified separately for the selected execution path.
+    protocols: [MCP]
+    deployment: Library embedded in an application; durable execution may use documented external integrations.
+    license: unknown
+    maturity: Official current documentation; no release-status claim stored in this pass.
+    official_sources:
+      - url: https://openai.github.io/openai-agents-python/agents/
+        title: Agents - OpenAI Agents SDK
+        accessed_at: "2026-07-12"
+        supports: [openai-agents, agent_loop, multi_agent]
+      - url: https://openai.github.io/openai-agents-python/tracing/
+        title: Tracing - OpenAI Agents SDK
+        accessed_at: "2026-07-12"
+        supports: [openai-tracing, tracing]
+      - url: https://openai.github.io/openai-agents-python/human_in_the_loop/
+        title: Human-in-the-loop - OpenAI Agents SDK
+        accessed_at: "2026-07-12"
+        supports: [openai-hitl, human_approval, run_state]
+      - url: https://openai.github.io/openai-agents-python/running_agents/
+        title: Running agents - OpenAI Agents SDK
+        accessed_at: "2026-07-12"
+        supports: [openai-running, durable_integrations]
+    verified_at: "2026-07-12"
+    confidence: high
+  - id: google-adk
+    name: Google Agent Development Kit
+    object_categories: [agent-framework, workflow-runtime-orchestrator]
+    planes: [surface, harness-sdk, orchestrator-durable-runtime, memory-knowledge, observability-eval, interoperability]
+    languages: [Python, TypeScript, Go, Java, Kotlin]
+    capabilities:
+      agent_loop:
+        status: verified
+        evidence: [adk-home]
+        notes: Official documentation presents agents, tools, context management, and runtime surfaces.
+      graph_workflows:
+        status: verified
+        evidence: [adk-home]
+        notes: ADK 2.0 documents structured graph workflows and multi-agent workflows.
+      session_state_memory:
+        status: verified
+        evidence: [adk-sessions]
+        notes: Session, State, and Memory are separate services; in-memory services lose data on restart.
+      evaluation:
+        status: verified
+        evidence: [adk-evaluation]
+        notes: Official evaluation documentation is present.
+      deployment:
+        status: verified
+        evidence: [adk-deployment]
+        notes: Official paths include Agent Runtime, Cloud Run, GKE, and standard deployment.
+      durable_execution:
+        status: partial
+        evidence: [adk-home, adk-sessions]
+        notes: Resume and persistent service options exist, but durability depends on selected runtime and storage.
+      human_approval:
+        status: partial
+        evidence: [adk-home]
+        notes: Human input and action confirmations are documented; exact production policy must be verified for the selected language/runtime.
+      sandbox:
+        status: unknown
+        evidence: []
+        notes: No universal sandbox claim was qualified.
+    durability:
+      status: partial
+      evidence: [adk-home, adk-sessions]
+      notes: Do not treat in-memory session services as durable.
+    hitl:
+      status: partial
+      evidence: [adk-home]
+      notes: Requires a target-specific verification pass.
+    sandbox:
+      status: unknown
+      evidence: []
+      notes: External execution isolation must be designed explicitly unless a selected deployment proves otherwise.
+    protocols: [MCP, A2A]
+    deployment: Local runtime or documented Google Cloud deployment paths.
+    license: unknown
+    maturity: ADK 2.0 documentation current; language-specific maturity must be checked independently.
+    official_sources:
+      - url: https://adk.dev/
+        title: Agent Development Kit
+        accessed_at: "2026-07-12"
+        supports: [adk-home, agents, graph_workflows, runtime, observability, protocols]
+      - url: https://adk.dev/sessions/
+        title: Conversational Context - Session, State, and Memory
+        accessed_at: "2026-07-12"
+        supports: [adk-sessions, session_state_memory, persistence_boundary]
+      - url: https://adk.dev/evaluate/
+        title: Why evaluate agents
+        accessed_at: "2026-07-12"
+        supports: [adk-evaluation, evaluation]
+      - url: https://adk.dev/deploy/
+        title: Deploying Your Agent
+        accessed_at: "2026-07-12"
+        supports: [adk-deployment, deployment]
+    verified_at: "2026-07-12"
+    confidence: high
+  - id: microsoft-agent-framework
+    name: Microsoft Agent Framework
+    object_categories: [agent-framework, workflow-runtime-orchestrator]
+    planes: [harness-sdk, orchestrator-durable-runtime, memory-knowledge, observability-eval, interoperability]
+    languages: [Python, .NET]
+    capabilities:
+      agents_and_tools:
+        status: verified
+        evidence: [maf-overview]
+        notes: Agents use models, tools, and MCP servers.
+      graph_workflows:
+        status: verified
+        evidence: [maf-overview]
+        notes: Workflows provide type-safe routing, checkpointing, and human-in-the-loop support.
+      checkpointing:
+        status: verified
+        evidence: [maf-checkpoints]
+        notes: Workflow state can be checkpointed and resumed; storage choice remains an application responsibility.
+      multi_provider:
+        status: verified
+        evidence: [maf-overview]
+        notes: The overview lists multiple model providers.
+      sandbox:
+        status: unknown
+        evidence: []
+        notes: No universal sandbox claim was qualified.
+    durability:
+      status: verified
+      evidence: [maf-checkpoints]
+      notes: Checkpoint APIs are documented; secure persistent storage must be selected and operated.
+    hitl:
+      status: verified
+      evidence: [maf-overview]
+      notes: Human-in-the-loop is a documented workflow capability.
+    sandbox:
+      status: unknown
+      evidence: []
+      notes: Treat execution isolation as a separate plane.
+    protocols: [MCP]
+    deployment: Library/runtime embedded in Python or .NET applications; deployment topology is application-defined.
+    license: unknown
+    maturity: Public preview as stated by the official overview.
+    official_sources:
+      - url: https://learn.microsoft.com/en-us/agent-framework/overview/
+        title: Microsoft Agent Framework Overview
+        accessed_at: "2026-07-12"
+        supports: [maf-overview, agents, workflows, hitl, mcp]
+      - url: https://learn.microsoft.com/en-us/agent-framework/workflows/checkpoints
+        title: Microsoft Agent Framework Workflows - Checkpoints
+        accessed_at: "2026-07-12"
+        supports: [maf-checkpoints, checkpointing, resume, storage_security]
+    verified_at: "2026-07-12"
+    confidence: high
+  - id: langgraph
+    name: LangGraph
+    object_categories: [workflow-runtime-orchestrator]
+    planes: [orchestrator-durable-runtime, memory-knowledge, observability-eval]
+    languages: [Python, TypeScript]
+    capabilities:
+      graph_orchestration:
+        status: verified
+        evidence: [langgraph-overview]
+        notes: Low-level graph orchestration for long-running stateful agents.
+      durable_execution:
+        status: verified
+        evidence: [langgraph-overview, langgraph-persistence]
+        notes: Persistence and checkpointing support resume and fault tolerance.
+      human_approval:
+        status: verified
+        evidence: [langgraph-overview, langgraph-persistence]
+        notes: Human-in-the-loop uses persisted graph state and interrupts.
+      memory:
+        status: verified
+        evidence: [langgraph-overview, langgraph-persistence]
+        notes: Working and cross-session memory are documented.
+      tracing_evaluation:
+        status: partial
+        evidence: [langgraph-overview]
+        notes: Deep observability is documented through the separate LangSmith product, not assumed in the open-source runtime alone.
+      sandbox:
+        status: absent
+        evidence: [langgraph-overview]
+        notes: The runtime overview does not present an execution sandbox; design it as a separate plane.
+    durability:
+      status: verified
+      evidence: [langgraph-overview, langgraph-persistence]
+      notes: Requires an appropriate checkpointer; in-memory storage is not production durability.
+    hitl:
+      status: verified
+      evidence: [langgraph-overview, langgraph-persistence]
+      notes: Interrupt and checkpoint semantics are documented.
+    sandbox:
+      status: absent
+      evidence: [langgraph-overview]
+      notes: External sandbox or isolated execution is required when the threat model calls for it.
+    protocols: []
+    deployment: Open-source runtime, with separate deployment and observability products available.
+    license: unknown
+    maturity: LangGraph v1 documentation describes stable core APIs.
+    official_sources:
+      - url: https://docs.langchain.com/oss/python/langgraph/overview
+        title: LangGraph overview
+        accessed_at: "2026-07-12"
+        supports: [langgraph-overview, durable_execution, hitl, memory]
+      - url: https://docs.langchain.com/oss/python/langgraph/persistence
+        title: Persistence - LangGraph
+        accessed_at: "2026-07-12"
+        supports: [langgraph-persistence, checkpointing, fault_tolerance, time_travel]
+      - url: https://docs.langchain.com/oss/python/releases/langgraph-v1
+        title: What's new in LangGraph v1
+        accessed_at: "2026-07-12"
+        supports: [stable_core, version_line]
+    verified_at: "2026-07-12"
+    confidence: high
+  - id: agent-skills
+    name: Agent Skills
+    object_categories: [skill-procedure]
+    planes: [skill-procedure, interoperability]
+    languages: []
+    capabilities:
+      progressive_disclosure:
+        status: verified
+        evidence: [agent-skills-spec]
+        notes: Metadata, SKILL body, and resources load progressively.
+      portable_package:
+        status: verified
+        evidence: [agent-skills-spec]
+        notes: SKILL.md plus optional scripts, references, and assets define the package.
+      runtime_orchestration:
+        status: absent
+        evidence: [agent-skills-spec]
+        notes: The specification defines a skill package, not a durable runtime.
+    durability:
+      status: absent
+      evidence: [agent-skills-spec]
+      notes: Must be supplied by another plane.
+    hitl:
+      status: absent
+      evidence: [agent-skills-spec]
+      notes: Must be supplied by host or workflow policy.
+    sandbox:
+      status: absent
+      evidence: [agent-skills-spec]
+      notes: Depends on the host.
+    protocols: [Agent Skills]
+    deployment: Skill directory discovered by a compatible host.
+    license: unknown
+    maturity: Current public specification.
+    official_sources:
+      - url: https://agentskills.io/specification
+        title: Agent Skills Specification
+        accessed_at: "2026-07-12"
+        supports: [agent-skills-spec, package, frontmatter, progressive_disclosure]
+    verified_at: "2026-07-12"
+    confidence: high
+  - id: model-context-protocol
+    name: Model Context Protocol
+    object_categories: [protocol]
+    planes: [interoperability]
+    languages: []
+    capabilities:
+      context_and_tools:
+        status: verified
+        evidence: [mcp-spec]
+        notes: Servers expose resources, prompts, and tools through host-client-server connections.
+      capability_negotiation:
+        status: verified
+        evidence: [mcp-spec]
+        notes: Stateful connections and client/server capability negotiation are specified.
+      consent_and_control:
+        status: partial
+        evidence: [mcp-spec]
+        notes: The specification states consent principles; the host must implement the approval UX and controls.
+      runtime_orchestration:
+        status: absent
+        evidence: [mcp-spec]
+        notes: MCP is an interoperability protocol, not the whole agent runtime.
+    durability:
+      status: absent
+      evidence: [mcp-spec]
+      notes: Supplied by host or workflow runtime.
+    hitl:
+      status: partial
+      evidence: [mcp-spec]
+      notes: Consent is required, but enforcement is host responsibility.
+    sandbox:
+      status: absent
+      evidence: [mcp-spec]
+      notes: Tool execution isolation is outside the protocol.
+    protocols: [MCP]
+    deployment: Host-client-server protocol over specified transports.
+    license: unknown
+    maturity: Specification version 2025-06-18.
+    official_sources:
+      - url: https://modelcontextprotocol.io/specification/2025-06-18
+        title: Model Context Protocol Specification 2025-06-18
+        accessed_at: "2026-07-12"
+        supports: [mcp-spec, architecture, capabilities, consent, security]
+    verified_at: "2026-07-12"
+    confidence: high
+  - id: a2a-protocol
+    name: A2A Protocol
+    object_categories: [protocol]
+    planes: [interoperability]
+    languages: []
+    capabilities:
+      remote_agent_tasks:
+        status: verified
+        evidence: [a2a-spec]
+        notes: The protocol defines task, message, artifact, streaming, cancellation, and subscription operations.
+      discovery:
+        status: verified
+        evidence: [a2a-spec]
+        notes: Agent Card discovery and capability declarations are specified.
+      asynchronous_delivery:
+        status: verified
+        evidence: [a2a-spec]
+        notes: Streaming and push notification mechanisms are specified.
+      authentication_authorization:
+        status: verified
+        evidence: [a2a-spec]
+        notes: Security schemes and authorization responsibilities are specified.
+      local_subagent_delegation:
+        status: absent
+        evidence: [a2a-spec]
+        notes: Use host-native delegation for local workers; A2A addresses remote agent/service boundaries.
+    durability:
+      status: partial
+      evidence: [a2a-spec]
+      notes: Task lifecycle and retrieval are specified; persistence quality remains an implementation responsibility.
+    hitl:
+      status: unknown
+      evidence: []
+      notes: No universal human approval layer was qualified.
+    sandbox:
+      status: absent
+      evidence: [a2a-spec]
+      notes: Execution isolation belongs to the implementing agents/services.
+    protocols: [A2A]
+    deployment: Protocol between independently deployed agents or services.
+    license: unknown
+    maturity: Current latest specification page accessed on 2026-07-12.
+    official_sources:
+      - url: https://a2a-protocol.org/latest/specification/
+        title: A2A Protocol Specification
+        accessed_at: "2026-07-12"
+        supports: [a2a-spec, tasks, artifacts, streaming, discovery, security]
+    verified_at: "2026-07-12"
+    confidence: high

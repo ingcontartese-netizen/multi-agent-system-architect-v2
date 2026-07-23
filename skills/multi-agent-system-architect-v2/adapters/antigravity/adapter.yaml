@@ -1,0 +1,8 @@
+schema_version: "1.0"
+host: "google-antigravity"
+canonical_core: "../../"
+discovery_metadata: null
+verified_global_target: "~/.gemini/config/skills/multi-agent-system-architect-v2"
+verified_project_target: "<workspace>/.agents/skills/multi-agent-system-architect-v2"
+doctrine_overrides: []
+installation: "forbidden-before-pm-gate"

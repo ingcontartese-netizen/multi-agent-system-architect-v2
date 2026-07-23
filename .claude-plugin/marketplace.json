@@ -1,0 +1,27 @@
+{
+  "name": "giuseppe-agent-skills",
+  "description": "Governed agent-system design skills by Giuseppe.",
+  "owner": {
+    "name": "Giuseppe",
+    "url": "https://github.com/ingcontartese-netizen"
+  },
+  "plugins": [
+    {
+      "name": "multi-agent-system-architect-v2",
+      "source": {
+        "source": "github",
+        "repo": "ingcontartese-netizen/multi-agent-system-architect-v2",
+        "ref": "v2.1.2"
+      },
+      "description": "Design the smallest governed agentic system that can prove it works.",
+      "author": {
+        "name": "Giuseppe"
+      },
+      "homepage": "https://github.com/ingcontartese-netizen/multi-agent-system-architect-v2",
+      "repository": "https://github.com/ingcontartese-netizen/multi-agent-system-architect-v2",
+      "license": "Apache-2.0",
+      "category": "development",
+      "tags": ["agents", "architecture", "governance", "verification"]
+    }
+  ]
+}

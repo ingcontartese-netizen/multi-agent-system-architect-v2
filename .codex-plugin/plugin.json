@@ -1,0 +1,33 @@
+{
+  "name": "multi-agent-system-architect-v2",
+  "version": "2.1.2",
+  "description": "Design the smallest governed agentic system that can prove it works.",
+  "author": {
+    "name": "Giuseppe",
+    "url": "https://github.com/ingcontartese-netizen"
+  },
+  "homepage": "https://github.com/ingcontartese-netizen/multi-agent-system-architect-v2",
+  "repository": "https://github.com/ingcontartese-netizen/multi-agent-system-architect-v2",
+  "license": "Apache-2.0",
+  "keywords": [
+    "agent-architecture",
+    "agent-skills",
+    "governance",
+    "multi-agent",
+    "verification"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Multi-Agent System Architect V2",
+    "shortDescription": "Governed design from no system to optional teams.",
+    "longDescription": "Choose the smallest justified architecture, then govern authority, state, tools, memory, security, evaluation, rollback, and proof.",
+    "developerName": "Giuseppe",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Write"],
+    "defaultPrompt": [
+      "Decide whether this task needs an agentic system.",
+      "Design a governed single-agent workflow.",
+      "Audit this multi-agent architecture and its evidence."
+    ]
+  }
+}

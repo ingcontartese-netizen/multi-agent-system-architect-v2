@@ -1,0 +1,49 @@
+schema_version: '2.0'
+document_status: draft
+proposal_id: ''
+created_at: null
+owner: ''
+signal:
+  source: ''
+  description: ''
+  recurrence: 0
+  affected_runs: []
+evidence: []
+impact:
+  immediate_value: ''
+  evolution_value: ''
+  affected_resources: []
+classification:
+  risk: null
+destination:
+  canonical_owner: ''
+  resource: ''
+proposed_change:
+  summary: ''
+  delta: []
+alternatives: []
+validation_plan:
+  checks: []
+  migration: ''
+  rollback: ''
+consent:
+  required: true
+  approver: ''
+  status: not_requested
+promotion:
+  threshold: ''
+  independent_verifier: ''
+  release_gate: ''
+status: proposed
+contract_version: '2.0'
+contract_refs: []
+migration_control:
+  automatic: false
+  mode: preview_only
+  source_ref: null
+  target_schema_version: '2.0'
+  mapping_ref: null
+  preview_evidence: []
+  readback_evidence: []
+  approval_ref: null
+  rollback_ref: null

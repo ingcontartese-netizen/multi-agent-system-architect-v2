@@ -1,0 +1,20 @@
+{
+  "name": "multi-agent-system-architect-v2",
+  "displayName": "Multi-Agent System Architect V2",
+  "version": "2.1.2",
+  "description": "Design the smallest governed agentic system that can prove it works.",
+  "author": {
+    "name": "Giuseppe",
+    "url": "https://github.com/ingcontartese-netizen"
+  },
+  "homepage": "https://github.com/ingcontartese-netizen/multi-agent-system-architect-v2",
+  "repository": "https://github.com/ingcontartese-netizen/multi-agent-system-architect-v2",
+  "license": "Apache-2.0",
+  "keywords": [
+    "agent-architecture",
+    "agent-skills",
+    "governance",
+    "multi-agent",
+    "verification"
+  ]
+}

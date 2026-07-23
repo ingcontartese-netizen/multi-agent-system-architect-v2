@@ -1,0 +1,53 @@
+name: Bug report
+description: Report a reproducible defect in the Skill, tooling, or documentation.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Release/tag
+      placeholder: v2.1.2
+    validations:
+      required: true
+  - type: dropdown
+    id: host
+    attributes:
+      label: Host
+      options:
+        - Codex
+        - Claude Code
+        - Claude Chat/Cowork
+        - Google Antigravity
+        - Cursor
+        - Host-independent tooling
+        - Other Agent Skills host
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Use synthetic data and remove credentials or personal information.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and observed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Include command, exit code, denominator, and relevant redacted output.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed credentials, private data, and destructive payloads.
+          required: true
