@@ -194,7 +194,9 @@ def test_cli_is_deterministic_and_reports_fixed_denominators(
     assert payload["digests"] == EXPECTED_DIGESTS
     assert payload["errors"] == []
     assert payload["platform_evidence"] == {
-        "windows": "live",
+        "windows": (
+            "live" if security_matrix.os.name == "nt" else "modeled_not_live_verified"
+        ),
         "linux": "modeled_not_live_verified",
         "macos": "modeled_not_live_verified",
     }
