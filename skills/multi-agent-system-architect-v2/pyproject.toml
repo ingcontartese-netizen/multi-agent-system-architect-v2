@@ -6,7 +6,7 @@ license-files = ["LICENSE.txt"]
 requires-python = ">=3.10"
 dependencies = [
   "PyYAML>=6.0,<7",
-  "jsonschema>=4.20,<5",
+  "jsonschema>=4.26.0,<5",
 ]
 
 [project.optional-dependencies]
