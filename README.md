@@ -39,8 +39,10 @@ Then open a fresh session, paste the [60-second smoke test](#a-60-second-smoke-t
 
 ### See it in action
 
+![The Skill running its necessity triage on a request for an "autonomous research team" and returning Mode A / no-system — nothing built](docs/assets/demo-no-system.gif)
+
 <details>
-<summary><strong>Real session: asking for an "autonomous research team" — the Skill's actual reply</strong></summary>
+<summary><strong>Full real session (text): asking for an "autonomous research team" — the Skill's actual reply</strong></summary>
 
 **Prompt:**
 
