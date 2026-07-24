@@ -57,7 +57,7 @@ Use multi-agent-system-architect-v2. I want an autonomous research team for a on
 > **Scope decision: NO SYSTEM (Mode A).** A one-off summary fails step 1 of the sequential necessity gate: a direct capability can deliver the result with no continuity, no persistent state, and no side effects. An "autonomous research team" is not justified — the doctrine treats multi-agent architecture as an outcome of triage, never the default, and no multi-agent justification condition (distinct permissions, independent verifier, useful parallelism, trust boundary) is material here.
 >
 > - **Mode:** A — no agentic system; hand off to a direct research-and-summarize task.
-> - **Autonomy:** AU2 for the handed-off task itself (supervised multi-step loop: search, read, synthesize, return). No standing autonomy is granted.
+> - **Autonomy:** AU0 — no autonomous system is created; the skill grants no standing autonomy and exits to a direct, human-run task.
 > - **Risk:** R0 — read-only research, reversible output, no privileged access, no blast radius.
 >
 > **Rationale:** "One-off" removes every driver that would warrant a system: no recurring workflow, no durable state, no tool orchestration beyond ordinary search. Why not simpler: nothing is simpler than Mode A. Why not more complex: a team would add coordination cost, latency, and governance surface with no measured benefit.
