@@ -277,6 +277,8 @@ Read [Security](SECURITY.md) before installation and [Security model](docs/SECUR
 - [Verification](docs/VERIFICATION.md)
 - [Security model](docs/SECURITY_MODEL.md)
 - [Release evidence](docs/RELEASE_EVIDENCE.md)
+- [Post-publication verification](docs/POST_PUBLISH_VERIFICATION.md)
+- [Support](SUPPORT.md)
 - [FAQ](docs/FAQ.md)
 - [Contributing](CONTRIBUTING.md)
 
